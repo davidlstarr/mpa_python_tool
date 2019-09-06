@@ -89,4 +89,4 @@ arcpy.Append_management(inputs="PCA_POLYGONS_View", target=Historic_Pavement_Con
 # txtFile.write(arcpy.GetMessages())
 # txtFile.close()
 
-arcpy.AddWarning("If no errors, you can move on to Step 4.")
+arcpy.AddWarning("If no errors, you can move on to Step 3c. Before moving to Step 3c please make sure to remove all layers from your map.")
