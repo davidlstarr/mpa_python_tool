@@ -87,7 +87,7 @@ message = int(arcpy.GetCount_management(merged_PCA_Updates_SpatialJoin_GT_2).get
 if message == 0:
    arcpy.AddMessage("Inspection point check success. There is one point per polygon!")
 else:
-   arcpy.AddError("Please check to ensure there is only one inspection point per polygon. Select all polygons that have a Join_Count>2")
+   arcpy.AddError("Please check to ensure there is only one inspection point per polygon.")
    paver_path = r""+arcpy.env.workspace+"\merged_PCA_Updates_SpatialJoin_GT_2"
    aprx = arcpy.mp.ArcGISProject("CURRENT")
    map = aprx.listMaps()[0]  # assumes data to be added to first map listed
