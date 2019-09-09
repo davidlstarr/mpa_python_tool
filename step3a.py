@@ -133,4 +133,4 @@ arcpy.Delete_management(in_data=Updated_record, data_type="")
 # txtFile.write(arcpy.GetMessages())
 # txtFile.close()
 
-arcpy.AddWarning("If no errors, you can move on to Step 3b.")
+arcpy.AddWarning("Please bring in Pavement Assessment Areas AFS and check to make sure your updated assessment points came across. If no errors, you can move on to Step 3b.")
