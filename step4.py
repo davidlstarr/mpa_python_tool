@@ -6,6 +6,9 @@
 import arcpy
 import json
 
+# To allow overwriting the outputs change the overwrite option to true.
+arcpy.env.overwriteOutput = False
+
 # Script parameters
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 SDE_CONNECTION = arcpy.GetParameterAsText(1)
@@ -47,10 +50,6 @@ from datetime import datetime
 # txtFile = open("c:\\temp\\GPMessages.txt", "w")
 # txtFile.write(arcpy.GetMessages())
 # txtFile.close()
-
-
-# To allow overwriting the outputs change the overwrite option to true.
-arcpy.env.overwriteOutput = False
 
 arcpy.Delete_management("WFS_PCA_PHOTOS_SELECTION")
 arcpy.Delete_management("SDE_PCA_PHOTOS_copy")

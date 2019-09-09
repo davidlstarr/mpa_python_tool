@@ -5,6 +5,9 @@
 import arcpy
 import json
 
+# To allow overwriting the outputs change the overwrite option to true.
+arcpy.env.overwriteOutput = False
+
 # Script parameters
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 SDE_CONNECTION = arcpy.GetParameterAsText(1)
@@ -36,10 +39,6 @@ ASPHALT_PCA_Updates = data["temp_paths"]["ASPHALT_PCA_Updates"]
 OTHER_PCA_Updates = data["temp_paths"]["OTHER_PCA_Updates"]
 
 arcpy.AddMessage("Reset Collection Points, Local PCA Point")
-
-
-# To allow overwriting the outputs change the overwrite option to true.
-arcpy.env.overwriteOutput = False
 
 #Delete Temporary Layers
 arcpy.Delete_management("TEMP_PAVERS_PCA_SELECTION")

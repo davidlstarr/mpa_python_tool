@@ -5,6 +5,9 @@
 import arcpy
 import json
 
+# To allow overwriting the outputs change the overwrite option to true.
+arcpy.env.overwriteOutput = False
+
 # Script parameters
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 SDE_CONNECTION = arcpy.GetParameterAsText(1)
@@ -34,9 +37,6 @@ PAVERS_PCA_Updates = data["temp_paths"]["PAVERS_PCA_Updates"]
 CONCRETE_PCA_Updates = data["temp_paths"]["CONCRETE_PCA_Updates"]
 ASPHALT_PCA_Updates = data["temp_paths"]["ASPHALT_PCA_Updates"]
 OTHER_PCA_Updates = data["temp_paths"]["OTHER_PCA_Updates"]
-
-# To allow overwriting the outputs change the overwrite option to true.
-arcpy.env.overwriteOutput = False
 
 arcpy.AddMessage("Update PCA Polygons PCA WFS")
 

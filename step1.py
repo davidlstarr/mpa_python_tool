@@ -6,18 +6,21 @@
 import arcpy
 import json
 
+# To allow overwriting the outputs change the overwrite option to true.
+arcpy.env.overwriteOutput = False
+
 #Make sure to drop the config file in your ArcPro project and change this to the config location
 
-with open('C:\\Users\\dstarr\\Documents\\ArcGIS\\Projects\MPA\\config.json') as json_data_file:
-    data = json.load(json_data_file)
-print(data)
-
-local_gdb_path = data['local_paths']['local_gdb_path']
-sde_path = data['local_paths']['sde_path']
+# with open('C:\\Users\\dstarr\\Documents\\ArcGIS\\Projects\MPA\\config.json') as json_data_file:
+#     data = json.load(json_data_file)
+# print(data)
+#
+# local_gdb_path = data['local_paths']['local_gdb_path']
+# sde_path = data['local_paths']['sde_path']
 
 # Script parameters
-arcpy.env.workspace = arcpy.GetParameterAsText(0) or local_gdb_path
-SDE_CONNECTION = arcpy.GetParameterAsText(1) or sde_path
+arcpy.env.workspace = arcpy.GetParameterAsText(0)
+SDE_CONNECTION = arcpy.GetParameterAsText(1)
 
 workspace_split = arcpy.env.workspace[:46]
 
@@ -46,14 +49,7 @@ ASPHALT_PCA_Updates = data["temp_paths"]["ASPHALT_PCA_Updates"]
 OTHER_PCA_Updates = data["temp_paths"]["OTHER_PCA_Updates"]
 
 #arcpy.AddMessage(data["wfs_paths"]["WFS_paver_path"])
-
-# To allow overwriting the outputs change the overwrite option to true.
-arcpy.env.overwriteOutput = False
 arcpy.AddMessage("Download data from WFS for review")
-
-# Script parameters
-arcpy.env.workspace = arcpy.GetParameterAsText(0)
-SDE_CONNECTION = arcpy.GetParameterAsText(1)
 
 # Export Messaging
 WFS_path_array = [WFS_paver_path, WFS_concrete_path, WFS_asphalt_path, WFS_other_type_path]

@@ -5,6 +5,9 @@
 import arcpy
 import json
 
+# To allow overwriting the outputs change the overwrite option to true.
+arcpy.env.overwriteOutput = False
+
 # Script parameters
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 SDE_CONNECTION = arcpy.GetParameterAsText(1)
@@ -37,9 +40,6 @@ OTHER_PCA_Updates = data["temp_paths"]["OTHER_PCA_Updates"]
 
 arcpy.AddMessage("Update Historic Condition Assessment Records")
 arcpy.AddMessage("Update Historic_Pavement_Assessments Table")
-
-# To allow overwriting the outputs change the overwrite option to true.
-arcpy.env.overwriteOutput = False
 
 # Local variables:
 Historic_Pavement_Conditions = SDE_CONNECTION + "/MPA_USER.Historic_Pavement_Assessments"
