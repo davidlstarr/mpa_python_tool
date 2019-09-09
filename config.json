@@ -1,5 +1,5 @@
 {
-    "**PLEASE UPDATE THE LOCAL_PATH AND WFS PATHS BELOW**": "",
+    "**PLEASE WFS PATHS BELOW**": "",
     "wfs_paths":{
         "WFS_paver_path":"https://services1.arcgis.com/oS5ru2iHb8I5vlTv/arcgis/rest/services/PCA_Collector_WFS/FeatureServer/0",
         "WFS_concrete_path":"https://services1.arcgis.com/oS5ru2iHb8I5vlTv/arcgis/rest/services/PCA_Collector_WFS/FeatureServer/1",

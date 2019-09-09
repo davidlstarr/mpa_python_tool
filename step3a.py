@@ -104,6 +104,13 @@ arcpy.CalculateField_management(in_table=join, field="L5Pavement_Assessment_Area
 
 temp_layers = "'" + TEMP_PAVERS_PCA + "';'" + TEMP_CONCRETE_PCA + "';'" + TEMP_ASPHALT_PCA + "';'" + TEMP_OTHER_PCA + "'"
 
+Temp_PCA_Polygon_join_feature_count = int(arcpy.GetCount_management("WFS_PCA_POLYGON_JOIN").getOutput(0))
+if Temp_PCA_Polygon_join_feature_count == 0:
+    arcpy.AddError("No features were updated")
+else:
+    arcpy.AddMessage(
+        "Updated {1} features in PCA Polygons".format("WFS_PCA_POLYGON_JOIN", Temp_PCA_Polygon_join_feature_count))
+
 # Process: Update Historic Assessment Areas Points
 arcpy.AddMessage("Update WFS Historic Assessment Areas")
 
