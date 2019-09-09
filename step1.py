@@ -6,9 +6,18 @@
 import arcpy
 import json
 
+#Make sure to drop the config file in your ArcPro project and change this to the config location
+
+with open('C:\\Users\\dstarr\\Documents\\ArcGIS\\Projects\MPA\\config.json') as json_data_file:
+    data = json.load(json_data_file)
+print(data)
+
+local_gdb_path = data['local_paths']['local_gdb_path']
+sde_path = data['local_paths']['sde_path']
+
 # Script parameters
-arcpy.env.workspace = arcpy.GetParameterAsText(0)
-SDE_CONNECTION = arcpy.GetParameterAsText(1)
+arcpy.env.workspace = arcpy.GetParameterAsText(0) or local_gdb_path
+SDE_CONNECTION = arcpy.GetParameterAsText(1) or sde_path
 
 workspace_split = arcpy.env.workspace[:46]
 
