@@ -70,6 +70,7 @@ for wfs_path, wfs_message in zip(WFS_path_array, WFS_message_array):
 merged_PCA_Updates = "merged_PCA_Updates"
 merged_PCA_Updates_SpatialJo = "merged_PCA_Updates_SpatialJo"
 merged_PCA_Updates_SpatialJoin_GT_2 = "merged_PCA_Updates_SpatialJoin_GT_2"
+MPA_USER_PCA_POLYGONS = SDE_CONNECTION + "/MPA_USER.Pavement/PCA_POLYGONS"
 
 #This is check to ensure that there is only one inspection point per polygon
 
@@ -144,9 +145,6 @@ for temp_path, temp_message in zip(temp_layers_path, temp_path_message_array):
 #------Create temporary layers with Lot IDs and Recent Assessment values combined------#
 
 arcpy.AddMessage("Create temporary layers with Lot IDs and Recent Assessment values combined")
-
-#Local Variables
-MPA_USER_PCA_POLYGONS = SDE_CONNECTION + "/MPA_USER.Pavement/PCA_POLYGONS"
 
 arcpy.Delete_management(PAVERS_PCA_Updates)
 arcpy.Delete_management(CONCRETE_PCA_Updates)
