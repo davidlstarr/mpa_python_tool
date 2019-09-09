@@ -38,6 +38,7 @@ CONCRETE_PCA_Updates = data["temp_paths"]["CONCRETE_PCA_Updates"]
 ASPHALT_PCA_Updates = data["temp_paths"]["ASPHALT_PCA_Updates"]
 OTHER_PCA_Updates = data["temp_paths"]["OTHER_PCA_Updates"]
 
+MPA_USER_PCA_POLYGONS = SDE_CONNECTION + "/MPA_USER.Pavement/PCA_POLYGONS"
 
 arcpy.AddMessage("Update PCA Polygons GDB")
 
@@ -112,7 +113,7 @@ else:
 
 ##Paver Calculations##
 
-arcpy.AddMessage("Field Calculation for Pavers")
+arcpy.AddMessage("Field Calculations for Pavers")
 
 # Process: Add Join (3)
 arcpy.AddJoin_management(in_layer_or_view="PCA_POLYGONS_TEMP_LAYER_PAVER", in_field="ASSETID", join_table=PAVERS_PCA_Updates, join_field="ASSETID", join_type="KEEP_COMMON")
@@ -137,7 +138,7 @@ arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field=
 
 ##Asphalt Calculations##
 
-arcpy.AddMessage("Field Calculation for Asphalt")
+arcpy.AddMessage("Field Calculations for Asphalt")
 
 # Process: Add Join (3)
 arcpy.AddJoin_management(in_layer_or_view="PCA_POLYGONS_TEMP_LAYER_ASPHALT", in_field="ASSETID", join_table=ASPHALT_PCA_Updates, join_field="ASSETID", join_type="KEEP_COMMON")
@@ -162,7 +163,7 @@ arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_ASPHALT", fiel
 
 ##Concrete Calculations##
 
-arcpy.AddMessage("Field Calculation for Concrete")
+arcpy.AddMessage("Field Calculations for Concrete")
 
 # Process: Add Join (3)
 arcpy.AddJoin_management(in_layer_or_view="PCA_POLYGONS_TEMP_LAYER_CONCRETE", in_field="ASSETID", join_table=CONCRETE_PCA_Updates, join_field="ASSETID", join_type="KEEP_COMMON")
@@ -185,6 +186,37 @@ arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", fie
 # Process: Calculate Field
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", field="COND_LABEL", expression="Reclass(!MPA_USER.PCA_POLYGONS.CONDITION!)", expression_type="PYTHON3", code_block=codeblock2)
 
-arcpy.AddWarning("Please bring in PCA_POLYGONS from the GDB and check to make sure the PCA Updates for each assessment point came across.If no errors, you can move on to Step 3a.")
+
+
+Temp_PCA_Polygon_paver_feature_count = int(arcpy.GetCount_management("PCA_POLYGONS_TEMP_LAYER_PAVER").getOutput(0))
+
+if Temp_PCA_Polygon_paver_feature_count == 0:
+    arcpy.AddMessage("No features imported")
+else:
+    arcpy.AddMessage(
+        "Updated {1} paver features in PCA Polygons".format("PCA_POLYGONS_TEMP_LAYER_PAVER", Temp_PCA_Polygon_paver_feature_count))
+
+Temp_PCA_Polygon_concrete_feature_count = int(arcpy.GetCount_management("PCA_POLYGONS_TEMP_LAYER_CONCRETE").getOutput(0))
+if Temp_PCA_Polygon_concrete_feature_count == 0:
+    arcpy.AddMessage("No features imported")
+else:
+    arcpy.AddMessage(
+        "Updated {1} concrete features in PCA Polygons".format("PCA_POLYGONS_TEMP_LAYER_CONCRETE", Temp_PCA_Polygon_concrete_feature_count))
+
+Temp_PCA_Polygon_asphalt_feature_count = int(arcpy.GetCount_management("PCA_POLYGONS_TEMP_LAYER_ASPHALT").getOutput(0))
+if Temp_PCA_Polygon_asphalt_feature_count == 0:
+    arcpy.AddMessage("No features imported")
+else:
+    arcpy.AddMessage(
+        "Updated {1} asphalt features in PCA Polygons".format("PCA_POLYGONS_TEMP_LAYER_ASPHALT", Temp_PCA_Polygon_asphalt_feature_count))
+
+#Add PCA Polygons to the map
+# pca_polygons_path = MPA_USER_PCA_POLYGONS
+# arcpy.AddMessage(pca_polygons_path)
+# aprx = arcpy.mp.ArcGISProject("CURRENT")
+# map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+# map.addDataFromPath(pca_polygons_path)
+
+arcpy.AddWarning("Please check PCA_Polygons GDB to make sure the PCA Updates for each assessment point came across. If no errors, you can move on to Step 3a.")
 
 
