@@ -5,6 +5,8 @@
 
 import arcpy
 import json
+import time
+from datetime import datetime
 
 # To allow overwriting the outputs change the overwrite option to true.
 arcpy.env.overwriteOutput = False
@@ -12,6 +14,7 @@ arcpy.env.overwriteOutput = False
 # Script parameters
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 SDE_CONNECTION = arcpy.GetParameterAsText(1)
+current_date = arcpy.GetParameterAsText(2)
 
 workspace_split = arcpy.env.workspace[:46]
 
@@ -41,11 +44,8 @@ OTHER_PCA_Updates = data["temp_paths"]["OTHER_PCA_Updates"]
 
 arcpy.AddMessage("Photo Process")
 
-import time
-from datetime import datetime
-
 # Write messages to a Text File
-# timenow = datetime.now()
+#
 # arcpy.AddMessage(timenow)
 # txtFile = open("c:\\temp\\GPMessages.txt", "w")
 # txtFile.write(arcpy.GetMessages())
@@ -60,13 +60,27 @@ TEMP_PCA_Photos = "TEMP_PCA_Photos"
 
 arcpy.Delete_management(TEMP_PCA_Photos)
 arcpy.Delete_management("SDE_PCA_PHOTOS_copy")
+arcpy.Delete_management("WFS_PCA_PHOTOS_copy")
 
 #Copy WFS PCA Photos and SDE PCA Photos
 arcpy.FeatureClassToFeatureClass_conversion(in_features=PCA_Photos, out_path=arcpy.env.workspace, out_name="SDE_PCA_PHOTOS_copy",where_clause="", field_mapping="", config_keyword="")
+arcpy.FeatureClassToFeatureClass_conversion(in_features=WFS_PCA_PHOTOS, out_path=arcpy.env.workspace, out_name="WFS_PCA_PHOTOS_copy",where_clause="", field_mapping="", config_keyword="")
 
 # Process: Select Layer By Location
 arcpy.AddMessage("Select by location where WFS PCA Photos are identical to SDE PCA Photos")
-WFS_PCA_PHOTOS_SELECTION = arcpy.SelectLayerByLocation_management(in_layer=WFS_PCA_PHOTOS, overlap_type="ARE_IDENTICAL_TO",select_features=PCA_Photos, search_distance="", selection_type="NEW_SELECTION", invert_spatial_relationship="INVERT")
+
+arcpy.AddMessage(current_date)
+
+date = datetime.strptime(current_date, "%d/%m/%Y")
+date_str = str(date)
+arcpy.AddMessage(date)
+
+date_expression = "created_date >= timestamp '"+date_str+"'"
+arcpy.AddMessage(date_expression)
+
+
+#WFS_PCA_PHOTOS_SELECTION = arcpy.SelectLayerByLocation_management(in_layer=WFS_PCA_PHOTOS, overlap_type="ARE_IDENTICAL_TO",select_features=PCA_Photos, search_distance="", selection_type="NEW_SELECTION", invert_spatial_relationship="INVERT")
+WFS_PCA_PHOTOS_SELECTION = arcpy.SelectLayerByAttribute_management(in_layer_or_view="WFS_PCA_PHOTOS_copy", selection_type="NEW_SELECTION", where_clause="created_date >= timestamp '"+date_str+"'", invert_where_clause="")
 arcpy.CopyFeatures_management(WFS_PCA_PHOTOS_SELECTION, "WFS_PCA_PHOTOS_SELECTION")
 
 WFS_PCA_Photos_result_int = arcpy.GetCount_management("WFS_PCA_PHOTOS_SELECTION")
@@ -97,4 +111,6 @@ else:
 # Process: Delete (2)
 arcpy.AddMessage("Deleted Temporary PCA Photos feature class")
 arcpy.Delete_management(in_data=TEMP_PCA_Photos, data_type="")
+arcpy.Delete_management("SDE_PCA_PHOTOS_copy")
+arcpy.Delete_management("WFS_PCA_PHOTOS_copy")
 

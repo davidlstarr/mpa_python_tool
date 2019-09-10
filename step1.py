@@ -94,14 +94,35 @@ if message == 0:
    arcpy.AddMessage("Inspection point check success. There is one point per polygon!")
 else:
    arcpy.AddError("Please check to ensure there is only one inspection point per polygon.")
-   paver_path = r""+arcpy.env.workspace+"\merged_PCA_Updates_SpatialJoin_GT_2"
+   join_paver_path = r""+arcpy.env.workspace+"\merged_PCA_Updates_SpatialJoin_GT_2"
    aprx = arcpy.mp.ArcGISProject("CURRENT")
    map = aprx.listMaps()[0]  # assumes data to be added to first map listed
-   map.addDataFromPath(paver_path)
-   paver_path = r""+arcpy.env.workspace+"\merged_PCA_Updates"
+   map.addDataFromPath(join_paver_path)
+
+   merged_paver_path = r""+arcpy.env.workspace+"\merged_PCA_Updates"
    aprx = arcpy.mp.ArcGISProject("CURRENT")
    map = aprx.listMaps()[0]  # assumes data to be added to first map listed
-   map.addDataFromPath(paver_path)
+   map.addDataFromPath(merged_paver_path)
+
+   wfs_paver_path = WFS_paver_path
+   aprx = arcpy.mp.ArcGISProject("CURRENT")
+   map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+   map.addDataFromPath(wfs_paver_path)
+
+   wfs_concrete_path = WFS_concrete_path
+   aprx = arcpy.mp.ArcGISProject("CURRENT")
+   map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+   map.addDataFromPath(wfs_concrete_path)
+
+   wfs_asphalt_path = WFS_asphalt_path
+   aprx = arcpy.mp.ArcGISProject("CURRENT")
+   map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+   map.addDataFromPath(wfs_asphalt_path)
+
+   wfs_other_path = WFS_other_type_path
+   aprx = arcpy.mp.ArcGISProject("CURRENT")
+   map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+   map.addDataFromPath(wfs_other_path)
    exit()
 
 

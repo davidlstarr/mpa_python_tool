@@ -60,18 +60,6 @@ codeblock2 = """def Reclass(field):
     return "Poor"
     """
 
-#------STEP 2 -- Append Recent Assessments to Historic Pt Feature------#
-
-arcpy.AddMessage("Append Recent Assessments to Historic Pt Feature")
-
-#variables
-Assessment_Locations_Historic = SDE_CONNECTION + "/MPA_USER.PCA_COLLECTIONS_HISTORIC"
-
-append_variable = "'" + TEMP_OTHER_PCA + "';'" + TEMP_ASPHALT_PCA + "';'" + TEMP_CONCRETE_PCA + "';'" + TEMP_PAVERS_PCA + "'"
-# Process: Append
-#@TODO Uncomment this before going live!!!!
-#arcpy.Append_management(inputs=append_variable, target=Assessment_Locations_Historic, schema_type="NO_TEST", field_mapping=r"AREASQYD 'AREA SQUARE YARDS' true true false 8 Double 0 0,First,#;AREASQFT 'AREA SQUARE FEET' true true false 8 Double 0 0,First,#;MATERIAL 'MATERIAL' true true false 50 Text 0 0,First,#,Local Datasets\Other Type of Pavement Condition Assessment,MATERIAL,0,50,Local Datasets\Asphalt Pavement Condition Assessment,MATERIAL,0,50,Local Datasets\Concrete Pavement Condition Assessment,MATERIAL,0,50,Local Datasets\Paver Condition Assessment,MATERIAL,0,50;LOCATION 'LOCATION' true true false 50 Text 0 0,First,#;USE_ 'USE' true true false 50 Text 0 0,First,#;USE_CUST 'USE CUSTOMER' true true false 50 Text 0 0,First,#;LEASED 'LEASED' true true false 50 Text 0 0,First,#;MAIN_RESP 'MAINTENANCE RESPONSIBILITY' true true false 50 Text 0 0,First,#;CONDITION 'CONDITION' true true false 2 Short 0 0,First,#,Local Datasets\Asphalt Pavement Condition Assessment,CONDITION,-1,-1,Local Datasets\Concrete Pavement Condition Assessment,CONDITION,-1,-1,Local Datasets\Paver Condition Assessment,CONDITION,-1,-1;COND_DATE 'COND_DATE' true true false 8 Date 0 0,First,#,Local Datasets\Other Type of Pavement Condition Assessment,CREATED_DATE,-1,-1,Local Datasets\Asphalt Pavement Condition Assessment,CREATED_DATE,-1,-1,Local Datasets\Concrete Pavement Condition Assessment,CREATED_DATE,-1,-1,Local Datasets\Paver Condition Assessment,CREATED_DATE,-1,-1;TYPE 'TYPE' true true false 50 Text 0 0,First,#;TERMINAL 'TERMINAL' true true false 15 Text 0 0,First,#;ASSETID 'ASSET ID' true true false 50 Text 0 0,First,#;ASSESSOR 'ASSESSOR' true true false 50 Text 0 0,First,#,Local Datasets\Other Type of Pavement Condition Assessment,CREATED_USER,0,50,Local Datasets\Asphalt Pavement Condition Assessment,CREATED_USER,0,50,Local Datasets\Concrete Pavement Condition Assessment,CREATED_USER,0,50,Local Datasets\Paver Condition Assessment,CREATED_USER,0,50;ASSESSMENT_COMMENTS 'ASSESSMENT_COMMENTS' true true false 1000 Text 0 0,First,#,Local Datasets\Other Type of Pavement Condition Assessment,ASSESSMENT_COMMENTS,0,1000,Local Datasets\Asphalt Pavement Condition Assessment,ASSESSMENT_COMMENTS,0,1000,Local Datasets\Concrete Pavement Condition Assessment,ASSESSMENT_COMMENTS,0,1000,Local Datasets\Paver Condition Assessment,ASSESSMENT_COMMENTS,0,1000;GLOBALID 'GLOBALID' false false true 38 GlobalID 0 0,First,#,Local Datasets\Other Type of Pavement Condition Assessment,GlobalID,-1,-1,Local Datasets\Asphalt Pavement Condition Assessment,GLOBALID,-1,-1,Local Datasets\Concrete Pavement Condition Assessment,GlobalID,-1,-1,Local Datasets\Paver Condition Assessment,GlobalID,-1,-1;AREAACRES 'AREAACRES' true true false 8 Double 0 0,First,#;created_user 'created_user' true true false 255 Text 0 0,First,#,Local Datasets\Other Type of Pavement Condition Assessment,CREATED_USER,0,255,Local Datasets\Asphalt Pavement Condition Assessment,CREATED_USER,0,255,Local Datasets\Concrete Pavement Condition Assessment,CREATED_USER,0,255,Local Datasets\Paver Condition Assessment,CREATED_USER,0,255;created_date 'created_date' true true false 8 Date 0 0,First,#,Local Datasets\Other Type of Pavement Condition Assessment,CREATED_DATE,-1,-1,Local Datasets\Asphalt Pavement Condition Assessment,CREATED_DATE,-1,-1,Local Datasets\Concrete Pavement Condition Assessment,CREATED_DATE,-1,-1,Local Datasets\Paver Condition Assessment,CREATED_DATE,-1,-1;last_edited_user 'last_edited_user' true true false 255 Text 0 0,First,#,Local Datasets\Other Type of Pavement Condition Assessment,LAST_EDITED_USER,0,255,Local Datasets\Asphalt Pavement Condition Assessment,LAST_EDITED_USER,0,255,Local Datasets\Concrete Pavement Condition Assessment,LAST_EDITED_USER,0,255,Local Datasets\Paver Condition Assessment,LAST_EDITED_USER,0,255;last_edited_date 'last_edited_date' true true false 8 Date 0 0,First,#,Local Datasets\Other Type of Pavement Condition Assessment,LAST_EDITED_DATE,-1,-1,Local Datasets\Asphalt Pavement Condition Assessment,LAST_EDITED_DATE,-1,-1,Local Datasets\Concrete Pavement Condition Assessment,LAST_EDITED_DATE,-1,-1,Local Datasets\Paver Condition Assessment,LAST_EDITED_DATE,-1,-1", subtype="", expression="")
-
 #------Update PCA Polygons------#
 
 arcpy.AddMessage("Update PCA Polygons")
@@ -80,6 +68,8 @@ arcpy.AddMessage("Update PCA Polygons")
 arcpy.MakeFeatureLayer_management(in_features=MPA_USER_PCA_POLYGONS, out_layer="PCA_POLYGONS_TEMP_LAYER_PAVER", where_clause="", workspace="", field_info="OBJECTID OBJECTID VISIBLE NONE;AREASQYD AREASQYD VISIBLE NONE;AREASQFT AREASQFT VISIBLE NONE;MATERIAL MATERIAL VISIBLE NONE;LOCATION LOCATION VISIBLE NONE;USE_ USE_ VISIBLE NONE;USE_CUST USE_CUST VISIBLE NONE;LEASED LEASED VISIBLE NONE;MAIN_RESP MAIN_RESP VISIBLE NONE;CONDITION CONDITION VISIBLE NONE;COND_DATE COND_DATE VISIBLE NONE;TYPE TYPE VISIBLE NONE;TERMINAL TERMINAL VISIBLE NONE;ASSETID ASSETID VISIBLE NONE;ASSESSOR ASSESSOR VISIBLE NONE;ASSESSMENT_COMMENTS ASSESSMENT_COMMENTS VISIBLE NONE;GLOBALID GLOBALID VISIBLE NONE;AREAACRES AREAACRES VISIBLE NONE;CREATED_USER CREATED_USER VISIBLE NONE;CREATED_DATE CREATED_DATE VISIBLE NONE;LAST_EDITED_USER LAST_EDITED_USER VISIBLE NONE;LAST_EDITED_DATE LAST_EDITED_DATE VISIBLE NONE;COND_LABEL COND_LABEL VISIBLE NONE;SHAPE SHAPE VISIBLE NONE;SHAPE.AREA SHAPE.AREA VISIBLE NONE;SHAPE.LEN SHAPE.LEN VISIBLE NONE")
 arcpy.MakeFeatureLayer_management(in_features=MPA_USER_PCA_POLYGONS, out_layer="PCA_POLYGONS_TEMP_LAYER_ASPHALT", where_clause="", workspace="", field_info="OBJECTID OBJECTID VISIBLE NONE;AREASQYD AREASQYD VISIBLE NONE;AREASQFT AREASQFT VISIBLE NONE;MATERIAL MATERIAL VISIBLE NONE;LOCATION LOCATION VISIBLE NONE;USE_ USE_ VISIBLE NONE;USE_CUST USE_CUST VISIBLE NONE;LEASED LEASED VISIBLE NONE;MAIN_RESP MAIN_RESP VISIBLE NONE;CONDITION CONDITION VISIBLE NONE;COND_DATE COND_DATE VISIBLE NONE;TYPE TYPE VISIBLE NONE;TERMINAL TERMINAL VISIBLE NONE;ASSETID ASSETID VISIBLE NONE;ASSESSOR ASSESSOR VISIBLE NONE;ASSESSMENT_COMMENTS ASSESSMENT_COMMENTS VISIBLE NONE;GLOBALID GLOBALID VISIBLE NONE;AREAACRES AREAACRES VISIBLE NONE;CREATED_USER CREATED_USER VISIBLE NONE;CREATED_DATE CREATED_DATE VISIBLE NONE;LAST_EDITED_USER LAST_EDITED_USER VISIBLE NONE;LAST_EDITED_DATE LAST_EDITED_DATE VISIBLE NONE;COND_LABEL COND_LABEL VISIBLE NONE;SHAPE SHAPE VISIBLE NONE;SHAPE.AREA SHAPE.AREA VISIBLE NONE;SHAPE.LEN SHAPE.LEN VISIBLE NONE")
 arcpy.MakeFeatureLayer_management(in_features=MPA_USER_PCA_POLYGONS, out_layer="PCA_POLYGONS_TEMP_LAYER_CONCRETE", where_clause="", workspace="", field_info="OBJECTID OBJECTID VISIBLE NONE;AREASQYD AREASQYD VISIBLE NONE;AREASQFT AREASQFT VISIBLE NONE;MATERIAL MATERIAL VISIBLE NONE;LOCATION LOCATION VISIBLE NONE;USE_ USE_ VISIBLE NONE;USE_CUST USE_CUST VISIBLE NONE;LEASED LEASED VISIBLE NONE;MAIN_RESP MAIN_RESP VISIBLE NONE;CONDITION CONDITION VISIBLE NONE;COND_DATE COND_DATE VISIBLE NONE;TYPE TYPE VISIBLE NONE;TERMINAL TERMINAL VISIBLE NONE;ASSETID ASSETID VISIBLE NONE;ASSESSOR ASSESSOR VISIBLE NONE;ASSESSMENT_COMMENTS ASSESSMENT_COMMENTS VISIBLE NONE;GLOBALID GLOBALID VISIBLE NONE;AREAACRES AREAACRES VISIBLE NONE;CREATED_USER CREATED_USER VISIBLE NONE;CREATED_DATE CREATED_DATE VISIBLE NONE;LAST_EDITED_USER LAST_EDITED_USER VISIBLE NONE;LAST_EDITED_DATE LAST_EDITED_DATE VISIBLE NONE;COND_LABEL COND_LABEL VISIBLE NONE;SHAPE SHAPE VISIBLE NONE;SHAPE.AREA SHAPE.AREA VISIBLE NONE;SHAPE.LEN SHAPE.LEN VISIBLE NONE")
+arcpy.MakeFeatureLayer_management(in_features=MPA_USER_PCA_POLYGONS, out_layer="PCA_POLYGONS_TEMP_LAYER_OTHER", where_clause="", workspace="", field_info="OBJECTID OBJECTID VISIBLE NONE;AREASQYD AREASQYD VISIBLE NONE;AREASQFT AREASQFT VISIBLE NONE;MATERIAL MATERIAL VISIBLE NONE;LOCATION LOCATION VISIBLE NONE;USE_ USE_ VISIBLE NONE;USE_CUST USE_CUST VISIBLE NONE;LEASED LEASED VISIBLE NONE;MAIN_RESP MAIN_RESP VISIBLE NONE;CONDITION CONDITION VISIBLE NONE;COND_DATE COND_DATE VISIBLE NONE;TYPE TYPE VISIBLE NONE;TERMINAL TERMINAL VISIBLE NONE;ASSETID ASSETID VISIBLE NONE;ASSESSOR ASSESSOR VISIBLE NONE;ASSESSMENT_COMMENTS ASSESSMENT_COMMENTS VISIBLE NONE;GLOBALID GLOBALID VISIBLE NONE;AREAACRES AREAACRES VISIBLE NONE;CREATED_USER CREATED_USER VISIBLE NONE;CREATED_DATE CREATED_DATE VISIBLE NONE;LAST_EDITED_USER LAST_EDITED_USER VISIBLE NONE;LAST_EDITED_DATE LAST_EDITED_DATE VISIBLE NONE;COND_LABEL COND_LABEL VISIBLE NONE;SHAPE SHAPE VISIBLE NONE;SHAPE.AREA SHAPE.AREA VISIBLE NONE;SHAPE.LEN SHAPE.LEN VISIBLE NONE")
+
 # Get the count from Temp PCA Polygon Layer Path
 Temp_PCA_Polygon_feature_count = int(arcpy.GetCount_management("PCA_POLYGONS_TEMP_LAYER_PAVER").getOutput(0))
 
@@ -177,7 +167,7 @@ arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", fie
 # Process: Paver Calc Assessment
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", field="MPA_USER.PCA_POLYGONS.ASSESSMENT_COMMENTS", expression="!CONCRETE_PCA_Updates.ASSESSMENT_COMMENTS_1!", expression_type="PYTHON_9.3", code_block="")
 
-# Process: Paver Calc Editor'
+# Process: Paver Calc Editor
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", field="MPA_USER.PCA_POLYGONS.ASSESSOR", expression="!CONCRETE_PCA_Updates.LAST_EDITED_USER_1!", expression_type="PYTHON_9.3", code_block="")
 
 # Process: Paver Calc Cond
@@ -186,29 +176,58 @@ arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", fie
 # Process: Calculate Field
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", field="COND_LABEL", expression="Reclass(!MPA_USER.PCA_POLYGONS.CONDITION!)", expression_type="PYTHON3", code_block=codeblock2)
 
+##Other Calculations##
+
+arcpy.AddMessage("Field Calculations for Other")
+
+# Process: Add Join (3)
+arcpy.AddJoin_management(in_layer_or_view="PCA_POLYGONS_TEMP_LAYER_OTHER", in_field="ASSETID", join_table=OTHER_PCA_Updates, join_field="ASSETID", join_type="KEEP_COMMON")
+
+# Process: Paver Calc Date
+arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_OTHER", field="MPA_USER.PCA_POLYGONS.COND_DATE", expression="!OTHER_PCA_Updates.LAST_EDITED_DATE_1!", expression_type="PYTHON_9.3", code_block="")
+
+# Process: Paver Calc Material
+arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_OTHER", field="MPA_USER.PCA_POLYGONS.MATERIAL", expression="!OTHER_PCA_Updates.MATERIAL_1!", expression_type="PYTHON_9.3", code_block="")
+
+# Process: Paver Calc Assessment
+arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_OTHER", field="MPA_USER.PCA_POLYGONS.ASSESSMENT_COMMENTS", expression="!OTHER_PCA_Updates.ASSESSMENT_COMMENTS_1!", expression_type="PYTHON_9.3", code_block="")
+
+# Process: Paver Calc Editor
+arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_OTHER", field="MPA_USER.PCA_POLYGONS.ASSESSOR", expression="!OTHER_PCA_Updates.LAST_EDITED_USER_1!", expression_type="PYTHON_9.3", code_block="")
+
+# Process: Calculate Field
+arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_OTHER", field="COND_LABEL", expression="Reclass(!MPA_USER.PCA_POLYGONS.CONDITION!)", expression_type="PYTHON3", code_block=codeblock2)
+
 
 
 Temp_PCA_Polygon_paver_feature_count = int(arcpy.GetCount_management("PCA_POLYGONS_TEMP_LAYER_PAVER").getOutput(0))
 
 if Temp_PCA_Polygon_paver_feature_count == 0:
-    arcpy.AddMessage("No features imported")
+    arcpy.AddMessage("No Paver features imported")
 else:
     arcpy.AddMessage(
         "Updated {1} paver features in PCA Polygons".format("PCA_POLYGONS_TEMP_LAYER_PAVER", Temp_PCA_Polygon_paver_feature_count))
 
 Temp_PCA_Polygon_concrete_feature_count = int(arcpy.GetCount_management("PCA_POLYGONS_TEMP_LAYER_CONCRETE").getOutput(0))
 if Temp_PCA_Polygon_concrete_feature_count == 0:
-    arcpy.AddMessage("No features imported")
+    arcpy.AddMessage("No Concrete features imported")
 else:
     arcpy.AddMessage(
         "Updated {1} concrete features in PCA Polygons".format("PCA_POLYGONS_TEMP_LAYER_CONCRETE", Temp_PCA_Polygon_concrete_feature_count))
 
 Temp_PCA_Polygon_asphalt_feature_count = int(arcpy.GetCount_management("PCA_POLYGONS_TEMP_LAYER_ASPHALT").getOutput(0))
 if Temp_PCA_Polygon_asphalt_feature_count == 0:
-    arcpy.AddMessage("No features imported")
+    arcpy.AddMessage("No Asphalt features imported")
 else:
     arcpy.AddMessage(
         "Updated {1} asphalt features in PCA Polygons".format("PCA_POLYGONS_TEMP_LAYER_ASPHALT", Temp_PCA_Polygon_asphalt_feature_count))
+
+Temp_PCA_Polygon_other_feature_count = int(arcpy.GetCount_management("PCA_POLYGONS_TEMP_LAYER_OTHER").getOutput(0))
+if Temp_PCA_Polygon_other_feature_count == 0:
+    arcpy.AddMessage("No other features imported")
+else:
+    arcpy.AddMessage(
+        "Updated {1} other features in PCA Polygons".format("PCA_POLYGONS_TEMP_LAYER_OTHER", Temp_PCA_Polygon_other_feature_count))
 
 #Add PCA Polygons to the map
 # pca_polygons_path = MPA_USER_PCA_POLYGONS
