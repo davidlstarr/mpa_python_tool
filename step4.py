@@ -19,7 +19,7 @@ current_date = arcpy.GetParameterAsText(2)
 workspace_split = arcpy.env.workspace[:46]
 
 #Make sure to drop the config file in your ArcPro project
-with open(workspace_split+'/config.json') as json_data_file:
+with open(arcpy.env.workspace+'/config.json') as json_data_file:
     data = json.load(json_data_file)
 
 # Web Feature Service Paths:
@@ -69,15 +69,10 @@ arcpy.FeatureClassToFeatureClass_conversion(in_features=WFS_PCA_PHOTOS, out_path
 # Process: Select Layer By Location
 arcpy.AddMessage("Select by location where WFS PCA Photos are identical to SDE PCA Photos")
 
-arcpy.AddMessage(current_date)
-
 date = datetime.strptime(current_date, "%d/%m/%Y")
 date_str = str(date)
-arcpy.AddMessage(date)
 
 date_expression = "created_date >= timestamp '"+date_str+"'"
-arcpy.AddMessage(date_expression)
-
 
 #WFS_PCA_PHOTOS_SELECTION = arcpy.SelectLayerByLocation_management(in_layer=WFS_PCA_PHOTOS, overlap_type="ARE_IDENTICAL_TO",select_features=PCA_Photos, search_distance="", selection_type="NEW_SELECTION", invert_spatial_relationship="INVERT")
 WFS_PCA_PHOTOS_SELECTION = arcpy.SelectLayerByAttribute_management(in_layer_or_view="WFS_PCA_PHOTOS_copy", selection_type="NEW_SELECTION", where_clause="created_date >= timestamp '"+date_str+"'", invert_where_clause="")
@@ -113,4 +108,5 @@ arcpy.AddMessage("Deleted Temporary PCA Photos feature class")
 arcpy.Delete_management(in_data=TEMP_PCA_Photos, data_type="")
 arcpy.Delete_management("SDE_PCA_PHOTOS_copy")
 arcpy.Delete_management("WFS_PCA_PHOTOS_copy")
+
 

@@ -15,7 +15,7 @@ SDE_CONNECTION = arcpy.GetParameterAsText(1)
 workspace_split = arcpy.env.workspace[:46]
 
 #Make sure to drop the config file in your ArcPro project
-with open(workspace_split+'/config.json') as json_data_file:
+with open(arcpy.env.workspace+'/config.json') as json_data_file:
     data = json.load(json_data_file)
 
 # Web Feature Service Paths:

@@ -15,7 +15,7 @@ SDE_CONNECTION = arcpy.GetParameterAsText(1)
 workspace_split = arcpy.env.workspace[:46]
 
 #Make sure to drop the config file in your ArcPro project
-with open(workspace_split+'/config.json') as json_data_file:
+with open(arcpy.env.workspace+'/config.json') as json_data_file:
     data = json.load(json_data_file)
 
 #Web Feature Service Paths:
@@ -45,7 +45,7 @@ arcpy.AddMessage("Update PCA Polygons GDB")
 # Local variables:
 
 PCA_POLYGONS_TEMP_LAYER = "PCA_POLYGONS_TEMP_LAYER"
-MPA_USER_PCA_POLYGONS = SDE_CONNECTION + "/MPA_USER.Pavement/PCA_POLYGONS"
+
 
 codeblock2 = """def Reclass(field):
   if field == 5:
@@ -62,7 +62,6 @@ codeblock2 = """def Reclass(field):
 
 #------Update PCA Polygons------#
 
-arcpy.AddMessage("Update PCA Polygons")
 
 # Process: Make Feature Layer (3)
 arcpy.MakeFeatureLayer_management(in_features=MPA_USER_PCA_POLYGONS, out_layer="PCA_POLYGONS_TEMP_LAYER_PAVER", where_clause="", workspace="", field_info="OBJECTID OBJECTID VISIBLE NONE;AREASQYD AREASQYD VISIBLE NONE;AREASQFT AREASQFT VISIBLE NONE;MATERIAL MATERIAL VISIBLE NONE;LOCATION LOCATION VISIBLE NONE;USE_ USE_ VISIBLE NONE;USE_CUST USE_CUST VISIBLE NONE;LEASED LEASED VISIBLE NONE;MAIN_RESP MAIN_RESP VISIBLE NONE;CONDITION CONDITION VISIBLE NONE;COND_DATE COND_DATE VISIBLE NONE;TYPE TYPE VISIBLE NONE;TERMINAL TERMINAL VISIBLE NONE;ASSETID ASSETID VISIBLE NONE;ASSESSOR ASSESSOR VISIBLE NONE;ASSESSMENT_COMMENTS ASSESSMENT_COMMENTS VISIBLE NONE;GLOBALID GLOBALID VISIBLE NONE;AREAACRES AREAACRES VISIBLE NONE;CREATED_USER CREATED_USER VISIBLE NONE;CREATED_DATE CREATED_DATE VISIBLE NONE;LAST_EDITED_USER LAST_EDITED_USER VISIBLE NONE;LAST_EDITED_DATE LAST_EDITED_DATE VISIBLE NONE;COND_LABEL COND_LABEL VISIBLE NONE;SHAPE SHAPE VISIBLE NONE;SHAPE.AREA SHAPE.AREA VISIBLE NONE;SHAPE.LEN SHAPE.LEN VISIBLE NONE")
@@ -237,5 +236,6 @@ else:
 # map.addDataFromPath(pca_polygons_path)
 
 arcpy.AddWarning("Please check PCA_Polygons GDB to make sure the PCA Updates for each assessment point came across. If no errors, you can move on to Step 3a.")
+
 
 
