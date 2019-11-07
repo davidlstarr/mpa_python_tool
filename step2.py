@@ -119,6 +119,9 @@ arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field=
 # Process: Paver Calc Editor
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field="MPA_USER.PCA_POLYGONS.ASSESSOR", expression="!PAVERS_PCA_Updates.LAST_EDITED_USER_1!", expression_type="PYTHON_9.3", code_block="")
 
+# Process: Paver Calc Use
+arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field="MPA_USER.PCA_POLYGONS.USE_", expression="!PAVERS_PCA_Updates.USE1!", expression_type="PYTHON_9.3", code_block="")
+
 # Process: Paver Calc Cond
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field="MPA_USER.PCA_POLYGONS.CONDITION", expression="!PAVERS_PCA_Updates.CONDITION_1!", expression_type="PYTHON_9.3", code_block="")
 
@@ -144,6 +147,9 @@ arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_ASPHALT", fiel
 # Process: Paver Calc Editor'
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_ASPHALT", field="MPA_USER.PCA_POLYGONS.ASSESSOR", expression="!ASPHALT_PCA_Updates.LAST_EDITED_USER_1!", expression_type="PYTHON_9.3", code_block="")
 
+# Process: Paver Calc Use
+arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_ASPHALT", field="MPA_USER.PCA_POLYGONS.USE_", expression="!ASPHALT_PCA_Updates.USE1!", expression_type="PYTHON_9.3", code_block="")
+
 # Process: Paver Calc Cond
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_ASPHALT", field="MPA_USER.PCA_POLYGONS.CONDITION", expression="!ASPHALT_PCA_Updates.CONDITION_1!", expression_type="PYTHON_9.3", code_block="")
 
@@ -157,19 +163,22 @@ arcpy.AddMessage("Field Calculations for Concrete")
 # Process: Add Join (3)
 arcpy.AddJoin_management(in_layer_or_view="PCA_POLYGONS_TEMP_LAYER_CONCRETE", in_field="ASSETID", join_table=CONCRETE_PCA_Updates, join_field="ASSETID", join_type="KEEP_COMMON")
 
-# Process: Paver Calc Date
+# Process: Concrete Calc Date
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", field="MPA_USER.PCA_POLYGONS.COND_DATE", expression="!CONCRETE_PCA_Updates.LAST_EDITED_DATE_1!", expression_type="PYTHON_9.3", code_block="")
 
-# Process: Paver Calc Material
+# Process: Concrete Calc Material
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", field="MPA_USER.PCA_POLYGONS.MATERIAL", expression="!CONCRETE_PCA_Updates.MATERIAL_1!", expression_type="PYTHON_9.3", code_block="")
 
-# Process: Paver Calc Assessment
+# Process: Concrete Calc Assessment
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", field="MPA_USER.PCA_POLYGONS.ASSESSMENT_COMMENTS", expression="!CONCRETE_PCA_Updates.ASSESSMENT_COMMENTS_1!", expression_type="PYTHON_9.3", code_block="")
 
-# Process: Paver Calc Editor
+# Process: Concrete Calc Editor
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", field="MPA_USER.PCA_POLYGONS.ASSESSOR", expression="!CONCRETE_PCA_Updates.LAST_EDITED_USER_1!", expression_type="PYTHON_9.3", code_block="")
 
-# Process: Paver Calc Cond
+# Process: Concrete Calc Cond
+arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", field="MPA_USER.PCA_POLYGONS.USE_", expression="!CONCRETE_PCA_Updates.USE1!", expression_type="PYTHON_9.3", code_block="")
+
+# Process: Concrete Calc Cond
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_CONCRETE", field="MPA_USER.PCA_POLYGONS.CONDITION", expression="!CONCRETE_PCA_Updates.CONDITION_1!", expression_type="PYTHON_9.3", code_block="")
 
 # Process: Calculate Field
@@ -182,16 +191,19 @@ arcpy.AddMessage("Field Calculations for Other")
 # Process: Add Join (3)
 arcpy.AddJoin_management(in_layer_or_view="PCA_POLYGONS_TEMP_LAYER_OTHER", in_field="ASSETID", join_table=OTHER_PCA_Updates, join_field="ASSETID", join_type="KEEP_COMMON")
 
-# Process: Paver Calc Date
+# Process: Other Calc Date
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_OTHER", field="MPA_USER.PCA_POLYGONS.COND_DATE", expression="!OTHER_PCA_Updates.LAST_EDITED_DATE_1!", expression_type="PYTHON_9.3", code_block="")
 
-# Process: Paver Calc Material
+# Process: Other Calc Use
+arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_OTHER", field="MPA_USER.PCA_POLYGONS.USE_", expression="!OTHER_PCA_Updates.USE1!", expression_type="PYTHON_9.3", code_block="")
+
+# Process: Other Calc Material
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_OTHER", field="MPA_USER.PCA_POLYGONS.MATERIAL", expression="!OTHER_PCA_Updates.MATERIAL_1!", expression_type="PYTHON_9.3", code_block="")
 
-# Process: Paver Calc Assessment
+# Process: Other Calc Assessment
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_OTHER", field="MPA_USER.PCA_POLYGONS.ASSESSMENT_COMMENTS", expression="!OTHER_PCA_Updates.ASSESSMENT_COMMENTS_1!", expression_type="PYTHON_9.3", code_block="")
 
-# Process: Paver Calc Editor
+# Process: Other Calc Editor
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_OTHER", field="MPA_USER.PCA_POLYGONS.ASSESSOR", expression="!OTHER_PCA_Updates.LAST_EDITED_USER_1!", expression_type="PYTHON_9.3", code_block="")
 
 # Process: Calculate Field
@@ -236,6 +248,7 @@ else:
 # map.addDataFromPath(pca_polygons_path)
 
 arcpy.AddWarning("Please check PCA_Polygons GDB to make sure the PCA Updates for each assessment point came across. If no errors, you can move on to Step 3a.")
+
 
 
 

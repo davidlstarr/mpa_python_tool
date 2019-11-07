@@ -140,6 +140,7 @@ Asphalt_Expression = "MinimumValue(!ASPHALT_CRACKING!,!ASPHALT_RUTTING!,!ASPHALT
 
 temp_layers_path = [TEMP_PAVERS_PCA, TEMP_CONCRETE_PCA, TEMP_ASPHALT_PCA]
 expression_array = [Paver_Expression, Concrete_Expression, Asphalt_Expression]
+WFS_path_array = [WFS_paver_path, WFS_concrete_path, WFS_asphalt_path, WFS_other_type_path]
 
 for temp_layers, work_space, expression in zip(WFS_path_array, temp_layers_path, expression_array):
         arcpy.FeatureClassToFeatureClass_conversion(in_features=temp_layers, out_path=arcpy.env.workspace, out_name=work_space, where_clause="", field_mapping="", config_keyword="")
@@ -219,3 +220,4 @@ map = aprx.listMaps()[0]  # assumes data to be added to first map listed
 map.addDataFromPath(paver_path)
 
 arcpy.AddWarning("Please confirm that this data is correct before running Step 2.")
+

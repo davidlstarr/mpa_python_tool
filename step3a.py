@@ -84,6 +84,10 @@ join = arcpy.AddJoin_management(in_layer_or_view=WFS_Pavement_Assessment_Areas, 
 arcpy.CopyFeatures_management(join, "WFS_PCA_POLYGON_JOIN")
 
 # Process: Calculate Field
+arcpy.AddMessage("Use Field Calculation")
+arcpy.CalculateField_management(in_table=join, field="L5Pavement_Assessment_Areas.USE_", expression="!MPA_USER.PCA_POLYGONS.USE_!", expression_type="PYTHON3", code_block="")
+
+# Process: Calculate Field
 arcpy.AddMessage("Condition Field Calculation")
 arcpy.CalculateField_management(in_table=join, field="L5Pavement_Assessment_Areas.CONDITION", expression="!MPA_USER.PCA_POLYGONS.CONDITION!", expression_type="PYTHON3", code_block="")
 
@@ -130,4 +134,5 @@ arcpy.Delete_management(in_data=Updated_record, data_type="")
 # txtFile.close()
 
 arcpy.AddWarning("Please bring in Pavement Assessment Areas WFS and check to make sure your updated assessment points came across. If no errors, you can move on to Step 3b.")
+
 
