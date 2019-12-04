@@ -99,7 +99,7 @@ arcpy.Append_management(inputs=temp_layers, target=WFS_Historic_Assessment_point
 #copying Historic Pavement Assessments
 arcpy.TableToTable_conversion(in_rows=Historic_Pavement_Conditions, out_path=arcpy.env.workspace, out_name="Historic_Pavement_Assessments_table_copy", where_clause="", field_mapping="AREASQYD 'AREA SQUARE YARDS' true true false 8 Double 8 38,First,#,PCA_POLYGONS_View,AREASQYD,-1,-1;AREASQFT 'AREA SQUARE FEET' true true false 8 Double 8 38,First,#,PCA_POLYGONS_View,AREASQFT,-1,-1;MATERIAL 'MATERIAL' true true false 50 Text 0 0,First,#,PCA_POLYGONS_View,MATERIAL,0,50;LOCATION 'LOCATION' true true false 50 Text 0 0,First,#,PCA_POLYGONS_View,LOCATION,0,50;USE_ 'USE' true true false 50 Text 0 0,First,#,PCA_POLYGONS_View,USE_,0,50;USE_CUST 'USE CUSTOMER' true true false 50 Text 0 0,First,#,PCA_POLYGONS_View,USE_CUST,0,50;LEASED 'LEASED' true true false 50 Text 0 0,First,#,PCA_POLYGONS_View,LEASED,0,50;MAIN_RESP 'MAINTENANCE RESPONSIBILITY' true true false 50 Text 0 0,First,#,PCA_POLYGONS_View,MAIN_RESP,0,50;CONDITION 'CONDITION' true true false 2 Short 0 5,First,#,PCA_POLYGONS_View,CONDITION,-1,-1;COND_DATE 'COND_DATE' true true false 8 Date 0 0,First,#,PCA_POLYGONS_View,COND_DATE,-1,-1;TYPE 'TYPE' true true false 50 Text 0 0,First,#,PCA_POLYGONS_View,TYPE,0,50;TERMINAL 'TERMINAL' true true false 15 Text 0 0,First,#,PCA_POLYGONS_View,TERMINAL,0,15;ASSETID 'ASSET ID' true true false 50 Text 0 0,First,#,PCA_POLYGONS_View,ASSETID,0,50;ASSESSOR 'ASSESSOR' true true false 50 Text 0 0,First,#,PCA_POLYGONS_View,ASSESSOR,0,50;GLOBALID 'GLOBALID' false false false 38 GlobalID 0 0,First,#,PCA_POLYGONS_View,GLOBALID,-1,-1;AREAACRES 'AREAACRES' true true false 8 Double 8 38,First,#,PCA_POLYGONS_View,AREAACRES,-1,-1;CREATED_USER 'CREATED_USER' true true false 255 Text 0 0,First,#,PCA_POLYGONS_View,CREATED_USER,0,255;CREATED_DATE 'CREATED_DATE' true true false 8 Date 0 0,First,#,PCA_POLYGONS_View,CREATED_DATE,-1,-1;LAST_EDITED_USER 'LAST_EDITED_USER' true true false 255 Text 0 0,First,#,PCA_POLYGONS_View,LAST_EDITED_USER,0,255;LAST_EDITED_DATE 'LAST_EDITED_DATE' true true false 8 Date 0 0,First,#,PCA_POLYGONS_View,LAST_EDITED_DATE,-1,-1;COND_LABEL 'COND_LABEL' true true false 10 Text 0 0,First,#,PCA_POLYGONS_View,COND_LABEL,0,10;SHAPE_AREA 'SHAPE.AREA' true false false 8 Double 8 38,First,#;SHAPE_LEN 'SHAPE.LEN' true false false 8 Double 8 38,First,#;ASSESSMENT_COMMENTS 'ASSESSMENT_COMMENTS' true true false 500 Text 0 0,First,#,PCA_POLYGONS_View,ASSESSMENT_COMMENTS,0,1000", config_keyword="")
 arcpy.FeatureClassToFeatureClass_conversion(in_features=WFS_Historic_Assessment_points, out_path=arcpy.env.workspace, out_name="WFS_Historic_Assessment_points_copy",where_clause="", field_mapping="", config_keyword="")
-arcpy.FeatureClassToFeatureClass_conversion(in_features=Assessment_Locations_Historic, out_path=arcpy.env.workspace, out_name="SDE_Historic_Assessment_points_copy",where_clause="", field_mapping="", config_keyword="")
+#arcpy.FeatureClassToFeatureClass_conversion(in_features=Assessment_Locations_Historic, out_path=arcpy.env.workspace, out_name="SDE_Historic_Assessment_points_copy",where_clause="", field_mapping="", config_keyword="")
 
 #------STEP 3b -- Append Recent Assessments to SDE Historic Pt Feature------#
 
@@ -122,21 +122,21 @@ else:
         arcpy.AddMessage(
             "imported {1} features.".format(Table_Name, message))
 
-historic_path = WFS_Historic_Assessment_points
-aprx = arcpy.mp.ArcGISProject("CURRENT")
-map = aprx.listMaps()[0]  # assumes data to be added to first map listed
-map.addDataFromPath(historic_path)
+# historic_path = WFS_Historic_Assessment_points
+# aprx = arcpy.mp.ArcGISProject("CURRENT")
+# map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+# map.addDataFromPath(historic_path)
 
-historic_path = r""+arcpy.env.workspace+"\SDE_Historic_Assessment_points_copy"
-aprx = arcpy.mp.ArcGISProject("CURRENT")
-map = aprx.listMaps()[0]  # assumes data to be added to first map listed
-map.addDataFromPath(historic_path)
+# historic_path = r""+arcpy.env.workspace+"\SDE_Historic_Assessment_points_copy"
+# aprx = arcpy.mp.ArcGISProject("CURRENT")
+# map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+# map.addDataFromPath(historic_path)
 
 
-historic_path = r""+arcpy.env.workspace+"\Historic_Pavement_Assessments_table_copy"
-aprx = arcpy.mp.ArcGISProject("CURRENT")
-map = aprx.listMaps()[0]  # assumes data to be added to first map listed
-map.addDataFromPath(historic_path)
+# historic_path = r""+arcpy.env.workspace+"\Historic_Pavement_Assessments_table_copy"
+# aprx = arcpy.mp.ArcGISProject("CURRENT")
+# map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+# map.addDataFromPath(historic_path)
 
 
 arcpy.AddWarning("Please check the Historic Condition Pavement Features and Table in your map and ensure that your assessment points came across. If not please complete step 1 -3a. Before moving to Step 3c please make sure to remove all layers from your map.")
