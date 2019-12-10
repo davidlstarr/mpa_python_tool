@@ -20,7 +20,7 @@ CONCRETE_PCA_Updates = r"C:\Users\temp\PCA_DATA.gdb\CONCRETE_PCA_Updates"
 ASPHALT_PCA_Updates = r"C:\Users\temp\PCA_DATA.gdb\ASPHALT_PCA_Updates"
 OTHER_PCA_Updates = r"C:\Users\temp\PCA_DATA.gdb\OTHER_PCA_Updates"
 
-# Process: Intersect
+'C:\Users\dstarr\Documents\ArcGIS\Projects\MPA\MPA_USER@DODB12_1 - Copy.sde/MPA_USER.Pavement/PCA_POLYGONS' #;C:\Users\dstarr\Downloads\Pavement Assessments (MPA Version)\Pavement Assessments (MPA Version)\Default.gdb/PAVERS_PCA #
 arcpy.Intersect_analysis(in_features=r"'C:\Users\dstarr\OneDrive - Johnson, Mirmiran & Thompson\Projects\MDOT MPA\Python tool\DODB12(1).sde\MPA_USER.PCA_POLYGONS' #;C:\Users\temp\PCA_DATA.gdb\PAVERS_PCA #", out_feature_class=PAVERS_PCA_Updates, join_attributes="ALL", cluster_tolerance="", output_type="INPUT")
 'C:\Users\dstarr\Documents\ArcGIS\Projects\MPA\MPA_USER@DODB12 (2).sde\MPA_USER.PCA_POLYGONS'#;PAVERS_PCA#
 # Process: Intersect (2)

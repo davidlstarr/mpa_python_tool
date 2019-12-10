@@ -119,14 +119,14 @@ arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field=
 # Process: Paver Calc Editor
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field="MPA_USER.PCA_POLYGONS.ASSESSOR", expression="!PAVERS_PCA_Updates.LAST_EDITED_USER_1!", expression_type="PYTHON_9.3", code_block="")
 
-# Process: Paver Calc Use
-arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field="MPA_USER.PCA_POLYGONS.USE_", expression="!PAVERS_PCA_Updates.USE1!", expression_type="PYTHON_9.3", code_block="")
-
 # Process: Paver Calc Cond
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field="MPA_USER.PCA_POLYGONS.CONDITION", expression="!PAVERS_PCA_Updates.CONDITION_1!", expression_type="PYTHON_9.3", code_block="")
 
 # Process: Calculate Field
 arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field="COND_LABEL", expression="Reclass(!MPA_USER.PCA_POLYGONS.CONDITION!)", expression_type="PYTHON3", code_block=codeblock2)
+
+# Process: Paver Calc Use
+arcpy.CalculateField_management(in_table="PCA_POLYGONS_TEMP_LAYER_PAVER", field="MPA_USER.PCA_POLYGONS.USE_", expression="!PAVERS_PCA_Updates.USE1!", expression_type="PYTHON_9.3", code_block="")
 
 ##Asphalt Calculations##
 

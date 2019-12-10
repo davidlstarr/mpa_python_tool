@@ -62,7 +62,7 @@ updated_record_feature_count = int(arcpy.GetCount_management(Updated_record).get
 if updated_record_feature_count == 0:
     arcpy.AddError("The Temp Updated Record layer has not been created. Please ensure your inputs are correct.")
 else:
-    arcpy.AddMessage("The temporary layers have been created.")
+    arcpy.AddMessage("The Temp Updated Record layer has been created")
 
 
 # Execute FeatureClassToFeatureClass
@@ -70,7 +70,7 @@ arcpy.FeatureClassToFeatureClass_conversion(in_features=WFS_Pavement_Assessment_
 
 
 # Process: Select Layer By Location
-#arcpy.AddMessage("Select by location where updated_record features intersect PCA Polygons")
+arcpy.AddMessage("Select by location where updated_record features intersect PCA Polygons")
 WFS_PCA_POLYGON_SELECTION = arcpy.SelectLayerByLocation_management(in_layer=MPA_USER_PCA_POLYGONS, overlap_type="INTERSECT", select_features=Updated_record, search_distance="", selection_type="NEW_SELECTION", invert_spatial_relationship="NOT_INVERT")
 
 # Copy the layer to a new permanent feature class
@@ -118,7 +118,7 @@ else:
 
 
 # Process: Delete
-#arcpy.AddMessage("Delete Updated_record layer")
+arcpy.AddMessage("Delete Updated_record layer")
 arcpy.Delete_management(in_data=Updated_record, data_type="")
 
 
@@ -134,5 +134,6 @@ arcpy.Delete_management(in_data=Updated_record, data_type="")
 # txtFile.close()
 
 arcpy.AddWarning("Please bring in Pavement Assessment Areas WFS and check to make sure your updated assessment points came across. If no errors, you can move on to Step 3b.")
+
 
 

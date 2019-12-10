@@ -41,6 +41,13 @@ OTHER_PCA_Updates = data["temp_paths"]["OTHER_PCA_Updates"]
 arcpy.AddMessage("Reset Collection Points, Local PCA Point")
 
 #Delete Temporary Layers
+
+arcpy.DeleteRows_management(WFS_paver_path)
+arcpy.DeleteRows_management(WFS_concrete_path)
+arcpy.DeleteRows_management(WFS_asphalt_path)
+arcpy.DeleteRows_management(WFS_other_type_path)
+
+
 arcpy.Delete_management("TEMP_PAVERS_PCA_SELECTION")
 arcpy.Delete_management("TEMP_CONCRETE_PCA_SELECTION")
 arcpy.Delete_management("TEMP_ASPHALT_PCA_SELECTION")
@@ -60,6 +67,8 @@ arcpy.Delete_management("WFS_Pavement_Assessment_Areas_copy")
 arcpy.Delete_management("SDE_PCA_PHOTOS_copy")
 arcpy.Delete_management("TEMP_PCA_Photos")
 arcpy.Delete_management("WFS_Historic_Assessment_points_copy")
+arcpy.Delete_management("Historic_Pavement_Assessments_table_copy")
+arcpy.Delete_management("SDE_Historic_Assessment_points_copy")
 arcpy.Delete_management("WFS_PCA_PHOTOS_copy")
 arcpy.Delete_management("WFS_PCA_PHOTOS_SELECTION")
 arcpy.AddMessage("PAVERS_PCA has been removed")
@@ -80,4 +89,5 @@ arcpy.AddMessage("OTHER_PCA_Updates has been removed")
 arcpy.Delete_management(OTHER_PCA_Updates)
 
 arcpy.AddWarning("All temporary layers have been removed. If no errors, you can move on to Step 4.")
+
 

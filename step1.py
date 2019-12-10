@@ -102,26 +102,7 @@ else:
    map = aprx.listMaps()[0]  # assumes data to be added to first map listed
    map.addDataFromPath(merged_paver_path)
 
-   wfs_paver_path = WFS_paver_path
-   aprx = arcpy.mp.ArcGISProject("CURRENT")
-   map = aprx.listMaps()[0]  # assumes data to be added to first map listed
-   map.addDataFromPath(wfs_paver_path)
 
-   wfs_concrete_path = WFS_concrete_path
-   aprx = arcpy.mp.ArcGISProject("CURRENT")
-   map = aprx.listMaps()[0]  # assumes data to be added to first map listed
-   map.addDataFromPath(wfs_concrete_path)
-
-   wfs_asphalt_path = WFS_asphalt_path
-   aprx = arcpy.mp.ArcGISProject("CURRENT")
-   map = aprx.listMaps()[0]  # assumes data to be added to first map listed
-   map.addDataFromPath(wfs_asphalt_path)
-
-   wfs_other_path = WFS_other_type_path
-   aprx = arcpy.mp.ArcGISProject("CURRENT")
-   map = aprx.listMaps()[0]  # assumes data to be added to first map listed
-   map.addDataFromPath(wfs_other_path)
-   exit()
 
 
 #Deleting Temporary Feature classes
@@ -142,9 +123,9 @@ temp_layers_path = [TEMP_PAVERS_PCA, TEMP_CONCRETE_PCA, TEMP_ASPHALT_PCA]
 expression_array = [Paver_Expression, Concrete_Expression, Asphalt_Expression]
 WFS_path_array = [WFS_paver_path, WFS_concrete_path, WFS_asphalt_path, WFS_other_type_path]
 
-for temp_layers, work_space, expression in zip(WFS_path_array, temp_layers_path, expression_array):
-        arcpy.FeatureClassToFeatureClass_conversion(in_features=temp_layers, out_path=arcpy.env.workspace, out_name=work_space, where_clause="", field_mapping="", config_keyword="")
-        arcpy.CalculateField_management(in_table=temp_layers, field="CONDITION", expression=expression, expression_type="PYTHON_9.3", code_block=codeblock)
+for wfs_path, temp_layers, expression in zip(WFS_path_array, temp_layers_path, expression_array):
+        arcpy.FeatureClassToFeatureClass_conversion(in_features=wfs_path, out_path=arcpy.env.workspace, out_name=temp_layers, where_clause="", field_mapping="", config_keyword="")
+        arcpy.CalculateField_management(in_table=wfs_path, field="CONDITION", expression=expression, expression_type="PYTHON_9.3", code_block=codeblock)
 
 arcpy.FeatureClassToFeatureClass_conversion(in_features=WFS_other_type_path, out_path=arcpy.env.workspace, out_name=TEMP_OTHER_PCA, where_clause="", field_mapping="", config_keyword="")
 
@@ -171,10 +152,17 @@ arcpy.Delete_management(CONCRETE_PCA_Updates)
 arcpy.Delete_management(ASPHALT_PCA_Updates)
 arcpy.Delete_management(OTHER_PCA_Updates)
 
-intersect_variable_paver = r"'" + MPA_USER_PCA_POLYGONS + "' #;" + TEMP_PAVERS_PCA + " #"
-intersect_variable_concrete = r"'" + MPA_USER_PCA_POLYGONS + "' #;" + TEMP_CONCRETE_PCA + " #"
-intersect_variable_asphalt = r"'" + MPA_USER_PCA_POLYGONS + "' #;" + TEMP_ASPHALT_PCA + " #"
-intersect_variable_other = r"'" + MPA_USER_PCA_POLYGONS + "' #;" + TEMP_OTHER_PCA + " #"
+temp_pavers_pca_path = arcpy.env.workspace + "/PAVERS_PCA"
+temp_concrete_pca_path = arcpy.env.workspace + "/CONCRETE_PCA"
+temp_asphalt_pca_path = arcpy.env.workspace + "/ASPHALT_PCA"
+temp_other_pca_path = arcpy.env.workspace + "/OTHER_PCA"
+
+intersect_variable_paver = r"'" + MPA_USER_PCA_POLYGONS + "' #;" + temp_pavers_pca_path + " #"
+#arcpy.AddMessage(intersect_variable_paver)
+intersect_variable_concrete = r"'" + MPA_USER_PCA_POLYGONS + "' #;" + temp_concrete_pca_path + " #"
+#arcpy.AddMessage(intersect_variable_concrete)
+intersect_variable_asphalt = r"'" + MPA_USER_PCA_POLYGONS + "' #;" + temp_asphalt_pca_path + " #"
+intersect_variable_other = r"'" + MPA_USER_PCA_POLYGONS + "' #;" + temp_other_pca_path + " #"
 
 #arcpy.AddMessage(intersect_variable_paver)
 
@@ -218,6 +206,26 @@ paver_path = r""+arcpy.env.workspace+"\OTHER_PCA_Updates"
 aprx = arcpy.mp.ArcGISProject("CURRENT")
 map = aprx.listMaps()[0]  # assumes data to be added to first map listed
 map.addDataFromPath(paver_path)
+
+wfs_paver_path = WFS_paver_path
+aprx = arcpy.mp.ArcGISProject("CURRENT")
+map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+map.addDataFromPath(wfs_paver_path)
+
+wfs_concrete_path = WFS_concrete_path
+aprx = arcpy.mp.ArcGISProject("CURRENT")
+map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+map.addDataFromPath(wfs_concrete_path)
+
+wfs_asphalt_path = WFS_asphalt_path
+aprx = arcpy.mp.ArcGISProject("CURRENT")
+map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+map.addDataFromPath(wfs_asphalt_path)
+
+wfs_other_path = WFS_other_type_path
+aprx = arcpy.mp.ArcGISProject("CURRENT")
+map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+map.addDataFromPath(wfs_other_path)
 
 arcpy.AddWarning("Please confirm that this data is correct before running Step 2.")
 
