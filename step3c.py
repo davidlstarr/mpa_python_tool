@@ -88,6 +88,31 @@ arcpy.Delete_management(ASPHALT_PCA_Updates)
 arcpy.AddMessage("OTHER_PCA_Updates has been removed")
 arcpy.Delete_management(OTHER_PCA_Updates)
 
+aprx = arcpy.mp.ArcGISProject("CURRENT")
+map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+paver_wfs_layer = map.listLayers("Paver Condition Assessment")[0]
+
+map.removeLayer(paver_wfs_layer)
+
+aprx = arcpy.mp.ArcGISProject("CURRENT")
+map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+concrete_wfs_layer = map.listLayers("Concrete Pavement Condition Assessment")[0]
+
+map.removeLayer(concrete_wfs_layer)
+
+aprx = arcpy.mp.ArcGISProject("CURRENT")
+map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+asphalt_wfs_layer = map.listLayers("Asphalt Pavement Condition Assessment")[0]
+
+map.removeLayer(asphalt_wfs_layer)
+
+aprx = arcpy.mp.ArcGISProject("CURRENT")
+map = aprx.listMaps()[0]  # assumes data to be added to first map listed
+other_wfs_layer = map.listLayers("Other Type of Pavement Condition Assessment")[0]
+
+map.removeLayer(other_wfs_layer)
+
+
 arcpy.AddWarning("All temporary layers have been removed. If no errors, you can move on to Step 4.")
 
 
