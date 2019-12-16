@@ -1,13 +1,13 @@
 {
     "**PLEASE UPDATE WFS PATHS BELOW**": "",
     "wfs_paths":{
-        "WFS_paver_path":"https://services1.arcgis.com/oS5ru2iHb8I5vlTv/arcgis/rest/services/PCA_Collector_WFS/FeatureServer/0",
-        "WFS_concrete_path":"https://services1.arcgis.com/oS5ru2iHb8I5vlTv/arcgis/rest/services/PCA_Collector_WFS/FeatureServer/1",
-        "WFS_asphalt_path":"https://services1.arcgis.com/oS5ru2iHb8I5vlTv/arcgis/rest/services/PCA_Collector_WFS/FeatureServer/2",
-        "WFS_other_type_path":"https://services1.arcgis.com/oS5ru2iHb8I5vlTv/arcgis/rest/services/PCA_Collector_WFS/FeatureServer/3",
-        "WFS_PCA_PHOTOS": "https://services1.arcgis.com/oS5ru2iHb8I5vlTv/arcgis/rest/services/PCA_Collector_WFS/FeatureServer/4",
-        "WFS_Pavement_Assessment_Areas": "https://services1.arcgis.com/oS5ru2iHb8I5vlTv/arcgis/rest/services/PCA_Collector_WFS/FeatureServer/5",
-        "WFS_Historic_Assessment_points": "https://services1.arcgis.com/oS5ru2iHb8I5vlTv/arcgis/rest/services/PCA_Collector_WFS/FeatureServer/6"
+        "WFS_paver_path":"",
+        "WFS_concrete_path":"",
+        "WFS_asphalt_path":"",
+        "WFS_other_type_path":"",
+        "WFS_PCA_PHOTOS": "",
+        "WFS_Pavement_Assessment_Areas": "",
+        "WFS_Historic_Assessment_points": ""
     },
     "temp_paths":{
         "TEMP_PAVERS_PCA": "PAVERS_PCA",
